@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"jobshop"},{"l":"jobshop.encodings"},{"l":"jobshop.solvers"},{"l":"jobshop.solvers.neighborhood"}]

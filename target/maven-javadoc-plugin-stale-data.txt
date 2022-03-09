@@ -1,0 +1,54 @@
+@options
+@packages
+-classpath
+'/home/runner/.m2/repository/net/sourceforge/argparse4j/argparse4j/0.9.0/argparse4j-0.9.0.jar'
+-encoding
+'UTF-8'
+-private
+--release
+11
+-sourcepath
+'/home/runner/work/jobshop/jobshop/code/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/runner/work/jobshop/jobshop/code/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'jobshop 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' '/home/runner/work/jobshop/jobshop/code/target/javadoc-bundle-options'
+-nohelp
+-use
+-version
+-windowtitle
+'jobshop 1.0-SNAPSHOT API'
+jobshop
+jobshop.solvers
+jobshop.solvers.neighborhood
+jobshop.encodings
+/home/runner/.m2/repository/net/sourceforge/argparse4j/argparse4j/0.9.0/argparse4j-0.9.0.jar = 1646864204916
+/home/runner/work/jobshop/jobshop/code/src/main/java = 1646864187388
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/constant-values.html = 1646864218183
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/member-search-index.js = 1646864218315
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/package-search-index.js = 1646864218307
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/index.html = 1646864218339
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/overview-tree.html = 1646864218255
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/package-search-index.zip = 1646864218315
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/search.js = 1646864218343
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/stylesheet.css = 1646864218343
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/member-search-index.zip = 1646864218315
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/overview-summary.html = 1646864218343
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/element-list = 1646864218143
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/index-all.html = 1646864218315
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/type-search-index.zip = 1646864218315
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/script.js = 1646864218343
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/allclasses.html = 1646864218335
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/type-search-index.js = 1646864218315
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/allclasses-index.html = 1646864218319
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/deprecated-list.html = 1646864218331
+/home/runner/work/jobshop/jobshop/code/target/site/apidocs/allpackages-index.html = 1646864218327
