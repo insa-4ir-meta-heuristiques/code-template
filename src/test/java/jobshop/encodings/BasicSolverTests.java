@@ -1,13 +1,13 @@
 package jobshop.encodings;
 
 import jobshop.Instance;
-import jobshop.Result;
 import jobshop.solvers.Solver;
 import jobshop.solvers.BasicSolver;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 public class BasicSolverTests {
 
@@ -16,11 +16,11 @@ public class BasicSolverTests {
         Instance instance = Instance.fromFile(Paths.get("instances/aaa1"));
 
         Solver solver = new BasicSolver();
-        Result result = solver.solve(instance, System.currentTimeMillis() + 10);
+        Optional<Schedule> result = solver.solve(instance, System.currentTimeMillis() + 10);
 
-        assert result.schedule.isPresent() : "The solver did not find a solution";
+        assert result.isPresent() : "The solver did not find a solution";
         // extract the schedule associated to the solution
-        Schedule schedule = result.schedule.get();
+        Schedule schedule = result.get();
         assert  schedule.isValid() : "The solution is not valid";
 
         System.out.println("Makespan: " + schedule.makespan());

@@ -1,7 +1,6 @@
 package jobshop.encodings;
 
 import jobshop.Instance;
-import jobshop.Result;
 import jobshop.solvers.BasicSolver;
 import jobshop.solvers.Solver;
 import org.junit.Before;
@@ -24,11 +23,11 @@ public class ManualEncodingTests {
         this.instance = Instance.fromFile(Paths.get("instances/aaa1"));
 
         Solver solver = new BasicSolver();
-        Result result = solver.solve(this.instance, System.currentTimeMillis() + 10);
+        Optional<Schedule> result = solver.solve(this.instance, System.currentTimeMillis() + 10);
 
-        assert result.schedule.isPresent() : "The solver did not find a solution";
+        assert result.isPresent() : "The solver did not find a solution";
         // extract the schedule associated to the solution
-        this.reference = result.schedule.get();
+        this.reference = result.get();
 
         System.out.println("***** Reference schedule to reproduce ******");
         System.out.println("MAKESPAN: " + this.reference.makespan());

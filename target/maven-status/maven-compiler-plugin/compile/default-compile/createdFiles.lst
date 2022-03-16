@@ -1,6 +1,4 @@
-jobshop/Result.class
 jobshop/encodings/Encoding.class
-jobshop/Result$ExitCause.class
 jobshop/encodings/ResourceOrder.class
 jobshop/solvers/DescentSolver.class
 jobshop/solvers/GreedySolver.class

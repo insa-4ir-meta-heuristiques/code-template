@@ -1,7 +1,9 @@
 package jobshop.solvers;
 
 import jobshop.Instance;
-import jobshop.Result;
+import jobshop.encodings.Schedule;
+
+import java.util.Optional;
 
 /** Common interface that must implemented by all solvers. */
 public interface Solver {
@@ -11,9 +13,9 @@ public interface Solver {
      * @param instance Jobshop instance that should be solved.
      * @param deadline Absolute time at which the solver should have returned a solution.
      *                 This time is in milliseconds and can be compared with System.currentTimeMilliseconds()
-     * @return A Result containing the solution found and an explanation of why the solver exited.
+     * @return An optional schedule that will be non empty if a solution was found.
      */
-    Result solve(Instance instance, long deadline);
+    Optional<Schedule> solve(Instance instance, long deadline);
 
     /** Static factory method to create a new solver based on its name. */
     static Solver getSolver(String name) {

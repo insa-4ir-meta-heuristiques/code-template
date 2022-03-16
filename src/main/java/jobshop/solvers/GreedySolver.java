@@ -1,7 +1,9 @@
 package jobshop.solvers;
 
 import jobshop.Instance;
-import jobshop.Result;
+import jobshop.encodings.Schedule;
+
+import java.util.Optional;
 
 /** An empty shell to implement a greedy solver. */
 public class GreedySolver implements Solver {
@@ -20,7 +22,7 @@ public class GreedySolver implements Solver {
     }
 
     @Override
-    public Result solve(Instance instance, long deadline) {
+    public Optional<Schedule> solve(Instance instance, long deadline) {
         throw new UnsupportedOperationException();
     }
 }

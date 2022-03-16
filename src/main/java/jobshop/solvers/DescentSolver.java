@@ -1,9 +1,10 @@
 package jobshop.solvers;
 
 import jobshop.Instance;
-import jobshop.Result;
-import jobshop.encodings.ResourceOrder;
+import jobshop.encodings.Schedule;
 import jobshop.solvers.neighborhood.Neighborhood;
+
+import java.util.Optional;
 
 /** An empty shell to implement a descent solver. */
 public class DescentSolver implements Solver {
@@ -22,7 +23,7 @@ public class DescentSolver implements Solver {
     }
 
     @Override
-    public Result solve(Instance instance, long deadline) {
+    public Optional<Schedule> solve(Instance instance, long deadline) {
         throw new UnsupportedOperationException();
     }
 

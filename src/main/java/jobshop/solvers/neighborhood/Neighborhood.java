@@ -1,6 +1,5 @@
 package jobshop.solvers.neighborhood;
 
-import jobshop.encodings.Encoding;
 import jobshop.encodings.ResourceOrder;
 
 import java.util.List;

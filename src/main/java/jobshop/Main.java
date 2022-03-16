@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import jobshop.encodings.Schedule;
@@ -118,17 +119,17 @@ public class Main {
                     long start = System.currentTimeMillis();
                     long deadline = System.currentTimeMillis() + solveTimeMs;
                     // run the solver on the current instance
-                    Result result = solver.solve(instance, deadline);
+                    Optional<Schedule> result = solver.solve(instance, deadline);
                     // measure elapsed time (in milliseconds)
                     long runtime = System.currentTimeMillis() - start;
 
                     // check that the solver returned a valid solution
-                    if(result.schedule.isEmpty() || !result.schedule.get().isValid()) {
-                        System.err.println("ERROR: solver returned an invalid schedule");
+                    if(result.isEmpty() || !result.get().isValid()) {
+                        System.err.println("ERROR: solver did not provide a valid schedule");
                         System.exit(1); // bug in implementation, bail out
                     }
                     // we have a valid schedule
-                    Schedule schedule = result.schedule.get();
+                    Schedule schedule = result.get();
 
                     // compute some statistics on the solution and print them.
                     int makespan = schedule.makespan();
