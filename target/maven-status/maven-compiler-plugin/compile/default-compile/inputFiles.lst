@@ -7,7 +7,6 @@
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/encodings/Schedule.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/DescentSolver.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/encodings/Encoding.java
-/home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/neighborhood/Neighbor.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/GreedySolver.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/BasicSolver.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/neighborhood/Neighborhood.java

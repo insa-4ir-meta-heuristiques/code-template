@@ -5,7 +5,6 @@ jobshop/encodings/ResourceOrder.class
 jobshop/solvers/DescentSolver.class
 jobshop/solvers/GreedySolver.class
 jobshop/Instance.class
-jobshop/solvers/neighborhood/Neighbor.class
 jobshop/solvers/Solver.class
 jobshop/solvers/neighborhood/Nowicki$Block.class
 jobshop/encodings/Task.class

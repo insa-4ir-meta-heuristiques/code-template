@@ -4,6 +4,7 @@ import jobshop.encodings.ResourceOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** Implementation of the Nowicki and Smutnicki neighborhood.
  *
@@ -12,7 +13,7 @@ import java.util.List;
  * For each block, two neighbors should be generated that respectively swap the first two and
  * last two tasks of the block.
  */
-public class Nowicki extends Neighborhood<ResourceOrder> {
+public class Nowicki extends Neighborhood {
 
     /** A block represents a subsequence of the critical path such that all tasks in it execute on the same machine.
      * This class identifies a block in a ResourceOrder representation.
@@ -57,7 +58,7 @@ public class Nowicki extends Neighborhood<ResourceOrder> {
      * machine 1 : (2,1) (0,2) (1,1)
      * machine 2 : ...
      */
-    public static class Swap extends Neighbor<ResourceOrder> {
+    public static class Swap {
         /** machine on which to perform the swap */
         public final int machine;
 
@@ -75,24 +76,21 @@ public class Nowicki extends Neighborhood<ResourceOrder> {
         }
 
 
-        /** Apply this swap on the given ResourceOrder, transforming it into a new solution. */
-        @Override
-        public void applyOn(ResourceOrder current) {
+        /** Creates a new ResourceOrder order that is the result of performing the swap in the original ResourceOrder.
+         *  The original ResourceOrder MUST NOT be modified by this operation.
+         */
+        public ResourceOrder generateFrom(ResourceOrder original) {
             throw new UnsupportedOperationException();
         }
 
-        /** Unapply this swap on the neighbor, transforming it back into the original solution. */
-        @Override
-        public void undoApplyOn(ResourceOrder current) {
-            throw new UnsupportedOperationException();
-        }
     }
 
 
     @Override
-    public List<Neighbor<ResourceOrder>> generateNeighbors(ResourceOrder current) {
-        // this simply converts the list of swaps into a list of neighbors
-        return new ArrayList<>(allSwaps(current));
+    public List<ResourceOrder> generateNeighbors(ResourceOrder current) {
+        // convert the list of swaps into a list of neighbors (function programming FTW)
+        return allSwaps(current).stream().map(swap -> swap.generateFrom(current)).collect(Collectors.toList());
+
     }
 
     /** Generates all swaps of the given ResourceOrder.
@@ -115,7 +113,6 @@ public class Nowicki extends Neighborhood<ResourceOrder> {
     /** For a given block, return the possible swaps for the Nowicki and Smutnicki neighborhood */
     List<Swap> neighbors(Block block) {
         throw new UnsupportedOperationException();
-
     }
 
 }

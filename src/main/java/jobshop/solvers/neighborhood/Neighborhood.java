@@ -1,17 +1,16 @@
 package jobshop.solvers.neighborhood;
 
 import jobshop.encodings.Encoding;
+import jobshop.encodings.ResourceOrder;
 
 import java.util.List;
 
-/** For a particular encoding Enc, a neighborhood allow the generation of the neighbors of
- * a particular solution.
- *
- * @param <Enc> A subclass of Encoding for which this encoding can generate neighbors.
+/** For a particular solution in the ResourceOrder encoding, a neighborhood allows the generation of its neighbors:
+ * a set of closely related solutions.
  */
-public abstract class Neighborhood<Enc extends Encoding> {
+public abstract class Neighborhood {
 
     /** Generates all neighbors for the current solution.  */
-    public abstract List<Neighbor<Enc>> generateNeighbors(Enc current);
+    public abstract List<ResourceOrder> generateNeighbors(ResourceOrder current);
 
 }
