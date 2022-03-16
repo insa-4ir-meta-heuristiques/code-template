@@ -1,1 +1,3 @@
-/home/runner/work/jobshop/jobshop/code/src/test/java/jobshop/encodings/EncodingTests.java
+/home/runner/work/jobshop/jobshop/code/src/test/java/jobshop/encodings/ManualEncodingTests.java
+/home/runner/work/jobshop/jobshop/code/src/test/java/jobshop/encodings/BasicSolverTests.java
+/home/runner/work/jobshop/jobshop/code/src/test/java/jobshop/ParsingTests.java

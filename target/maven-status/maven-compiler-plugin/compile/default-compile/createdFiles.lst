@@ -1,12 +1,10 @@
 jobshop/Result.class
 jobshop/encodings/Encoding.class
 jobshop/Result$ExitCause.class
-jobshop/encodings/JobNumbers.class
 jobshop/encodings/ResourceOrder.class
 jobshop/solvers/DescentSolver.class
 jobshop/solvers/GreedySolver.class
 jobshop/Instance.class
-jobshop/solvers/RandomSolver.class
 jobshop/solvers/neighborhood/Neighbor.class
 jobshop/solvers/Solver.class
 jobshop/solvers/neighborhood/Nowicki$Block.class
@@ -16,7 +14,6 @@ jobshop/solvers/neighborhood/Neighborhood.class
 jobshop/BestKnownResults.class
 jobshop/encodings/Schedule.class
 jobshop/Main.class
-jobshop/MainTest.class
 jobshop/solvers/neighborhood/Nowicki$Swap.class
 jobshop/solvers/GreedySolver$Priority.class
 jobshop/solvers/BasicSolver.class

@@ -11,8 +11,5 @@
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/GreedySolver.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/BasicSolver.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/neighborhood/Neighborhood.java
-/home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/MainTest.java
-/home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/encodings/JobNumbers.java
-/home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/solvers/RandomSolver.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/encodings/ResourceOrder.java
 /home/runner/work/jobshop/jobshop/code/src/main/java/jobshop/Instance.java

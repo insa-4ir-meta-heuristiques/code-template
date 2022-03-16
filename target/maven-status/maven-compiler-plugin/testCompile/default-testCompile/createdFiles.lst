@@ -1,1 +1,3 @@
-jobshop/encodings/EncodingTests.class
+jobshop/encodings/BasicSolverTests.class
+jobshop/ParsingTests.class
+jobshop/encodings/ManualEncodingTests.class

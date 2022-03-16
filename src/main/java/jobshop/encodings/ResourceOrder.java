@@ -86,7 +86,7 @@ public final class ResourceOrder extends Encoding {
 
     @Override
     public Optional<Schedule> toSchedule() {
-        // indicate for each task that have been scheduled, its start time
+        // indicates, for each task that have been scheduled, its start time
         Schedule schedule = new Schedule(instance);
 
         // for each job, how many tasks have been scheduled (0 initially)

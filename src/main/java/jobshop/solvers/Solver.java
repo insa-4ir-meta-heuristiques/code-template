@@ -19,7 +19,6 @@ public interface Solver {
     static Solver getSolver(String name) {
         switch (name) {
             case "basic": return new BasicSolver();
-            case "random": return new RandomSolver();
             case "spt": return new GreedySolver(GreedySolver.Priority.SPT);
             // TODO: add new solvers
             default: throw new RuntimeException("Unknown solver: "+ name);
