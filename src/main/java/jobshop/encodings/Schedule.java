@@ -3,6 +3,7 @@ package jobshop.encodings;
 import jobshop.Instance;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /** Direct encoding of the solution to JobShop problem.
@@ -240,5 +241,27 @@ public class Schedule extends Encoding {
     @Override
     public Optional<Schedule> toSchedule() {
         return Optional.of(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Schedule schedule = (Schedule) o;
+        if (times.length != schedule.times.length) {
+            return false;
+        }
+        for(int i=0; i<times.length; i++) {
+            if (!Arrays.equals(times[i], schedule.times[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.stream(times).map(Arrays::hashCode).collect(Collectors.toList()).hashCode();
+
     }
 }
