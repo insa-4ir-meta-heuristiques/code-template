@@ -4,6 +4,7 @@ import jobshop.encodings.ResourceOrder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** Implementation of the Nowicki and Smutnicki neighborhood.
@@ -62,7 +63,8 @@ public class Nowicki extends Neighborhood {
         /** machine on which to perform the swap */
         public final int machine;
 
-        /** index of one task to be swapped (in the resource order encoding) */
+        /** index of one task to be swapped (in the resource order encoding).
+         * t1 should appear earlier than t2 in the resource order. */
         public final int t1;
 
         /** index of the other task to be swapped (in the resource order encoding) */
@@ -71,8 +73,13 @@ public class Nowicki extends Neighborhood {
         /** Creates a new swap of two tasks. */
         Swap(int machine, int t1, int t2) {
             this.machine = machine;
-            this.t1 = t1;
-            this.t2 = t2;
+            if (t1 < t2) {
+                this.t1 = t1;
+                this.t2 = t2;
+            } else {
+                this.t1 = t2;
+                this.t2 = t1;
+            }
         }
 
 
@@ -83,6 +90,18 @@ public class Nowicki extends Neighborhood {
             throw new UnsupportedOperationException();
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Swap swap = (Swap) o;
+            return machine == swap.machine && t1 == swap.t1 && t2 == swap.t2;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(machine, t1, t2);
+        }
     }
 
 
