@@ -53,6 +53,15 @@ public final class ResourceOrder extends Encoding {
         }
     }
 
+    public ResourceOrder(ResourceOrder original) {
+        super(original.instance);
+        this.nextFreeSlot = original.nextFreeSlot.clone();
+        this.tasksByMachine = new Task[original.tasksByMachine.length][];
+        for(int i=0 ; i<this.tasksByMachine.length ; i++) {
+            this.tasksByMachine[i] = original.tasksByMachine[i].clone();
+        }
+    }
+
     /** Adds the given task to the queue of the given machine. */
     public void addTaskToMachine(int machine, Task task) {
         if(instance.machine(task) != machine) {
@@ -142,12 +151,12 @@ public final class ResourceOrder extends Encoding {
      * May fail if the resource order does not represent a valid solution.
      */
     public ResourceOrder copy() {
-        var schedule = this.toSchedule();
-        if (schedule.isEmpty()) {
-            throw new RuntimeException("Cannot copy an invalid ResourceOrder");
-        } else {
-            return new ResourceOrder(schedule.get());
-        }
+        return new ResourceOrder(this);
+    }
+
+    @Override
+    protected Object clone() {
+        return new ResourceOrder(this);
     }
 
     @Override
