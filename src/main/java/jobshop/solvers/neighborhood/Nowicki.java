@@ -1,6 +1,7 @@
 package jobshop.solvers.neighborhood;
 
 import jobshop.encodings.ResourceOrder;
+import jobshop.encodings.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,34 +17,6 @@ import java.util.stream.Collectors;
  */
 public class Nowicki extends Neighborhood {
 
-    /** A block represents a subsequence of the critical path such that all tasks in it execute on the same machine.
-     * This class identifies a block in a ResourceOrder representation.
-     *
-     * Consider the solution in ResourceOrder representation
-     * machine 0 : (0,1) (1,2) (2,2)
-     * machine 1 : (0,2) (2,1) (1,1)
-     * machine 2 : ...
-     *
-     * The block with : machine = 1, firstTask= 0 and lastTask = 1
-     * Represent the task sequence : [(0,2) (2,1)]
-     *
-     * */
-    public static class Block {
-        /** machine on which the block is identified */
-        public final int machine;
-        /** index of the first task of the block */
-        public final int firstTask;
-        /** index of the last task of the block */
-        public final int lastTask;
-
-        /** Creates a new block. */
-        Block(int machine, int firstTask, int lastTask) {
-            this.machine = machine;
-            this.firstTask = firstTask;
-            this.lastTask = lastTask;
-        }
-    }
-
     /**
      * Represents a swap of two tasks on the same machine in a ResourceOrder encoding.
      *
@@ -52,7 +25,7 @@ public class Nowicki extends Neighborhood {
      * machine 1 : (0,2) (2,1) (1,1)
      * machine 2 : ...
      *
-     * The swap with : machine = 1, t1= 0 and t2 = 1
+     * The swap with : t1= (0,2) and t2 = (2,1)
      * Represent inversion of the two tasks : (0,2) and (2,1)
      * Applying this swap on the above resource order should result in the following one :
      * machine 0 : (0,1) (1,2) (2,2)
@@ -60,20 +33,18 @@ public class Nowicki extends Neighborhood {
      * machine 2 : ...
      */
     public static class Swap {
-        /** machine on which to perform the swap */
-        public final int machine;
+        /** First task to be swapped.
+         *
+         * Invariant: this is always the task with the smallest job of the two */
+        public final Task t1;
 
-        /** index of one task to be swapped (in the resource order encoding).
-         * t1 should appear earlier than t2 in the resource order. */
-        public final int t1;
-
-        /** index of the other task to be swapped (in the resource order encoding) */
-        public final int t2;
+        /** Second task to be swapped */
+        public final Task t2;
 
         /** Creates a new swap of two tasks. */
-        Swap(int machine, int t1, int t2) {
-            this.machine = machine;
-            if (t1 < t2) {
+        Swap(Task t1, Task t2) {
+            assert t1.job != t2.job;
+            if (t1.job < t2.job) {
                 this.t1 = t1;
                 this.t2 = t2;
             } else {
@@ -95,12 +66,12 @@ public class Nowicki extends Neighborhood {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Swap swap = (Swap) o;
-            return machine == swap.machine && t1 == swap.t1 && t2 == swap.t2;
+            return t1.equals(swap.t1) && t2.equals(swap.t2);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(machine, t1, t2);
+            return Objects.hash(t1, t2);
         }
     }
 
@@ -109,28 +80,11 @@ public class Nowicki extends Neighborhood {
     public List<ResourceOrder> generateNeighbors(ResourceOrder current) {
         // convert the list of swaps into a list of neighbors (function programming FTW)
         return allSwaps(current).stream().map(swap -> swap.generateFrom(current)).collect(Collectors.toList());
-
     }
 
     /** Generates all swaps of the given ResourceOrder.
      * This method can be used if one wants to access the inner fields of a neighbors. */
     public List<Swap> allSwaps(ResourceOrder current) {
-        List<Swap> neighbors = new ArrayList<>();
-        // iterate over all blocks of the critical path
-        for(var block : blocksOfCriticalPath(current)) {
-            // for this block, compute all neighbors and add them to the list of neighbors
-            neighbors.addAll(neighbors(block));
-        }
-        return neighbors;
-    }
-
-    /** Returns a list of all the blocks of the critical path. */
-    List<Block> blocksOfCriticalPath(ResourceOrder order) {
-        throw new UnsupportedOperationException();
-    }
-
-    /** For a given block, return the possible swaps for the Nowicki and Smutnicki neighborhood */
-    List<Swap> neighbors(Block block) {
         throw new UnsupportedOperationException();
     }
 

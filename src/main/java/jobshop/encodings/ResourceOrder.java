@@ -81,13 +81,32 @@ public final class ResourceOrder extends Encoding {
         return tasksByMachine[machine][taskIndex];
     }
 
+    int getIndexOfTask(Task task) {
+        int machine = instance.machine(task);
+        for (int i=0 ; i< tasksByMachine[machine].length ; i++) {
+            if(tasksByMachine[machine][i].equals(task)) {
+                return i;
+            }
+        }
+        throw new RuntimeException("No such task in the resource order: "+ task);
+    }
+
+    /** Exchange the order of two tasks that are scheduled on a given machine. */
+    public void swapTasks(Task t1, Task t2) {
+        int machine = instance.machine(t1);
+        if (machine != instance.machine(t2)) {
+            throw new RuntimeException("Cannot swap tasks on different machines");
+        }
+        this.swapTasks(machine, getIndexOfTask(t1), getIndexOfTask(t2));
+    }
+
     /** Exchange the order of two tasks that are scheduled on a given machine.
      *
      * @param machine Machine on which the two tasks appear (line on which to perform the exchange)
      * @param indexTask1 Position of the first task in the machine's queue
      * @param indexTask2 Position of the second task in the machine's queue
      */
-    public void swapTasks(int machine, int indexTask1, int indexTask2) {
+    void swapTasks(int machine, int indexTask1, int indexTask2) {
         Task tmp = tasksByMachine[machine][indexTask1];
         tasksByMachine[machine][indexTask1] = tasksByMachine[machine][indexTask2];
         tasksByMachine[machine][indexTask2] = tmp;
@@ -156,7 +175,7 @@ public final class ResourceOrder extends Encoding {
 
     @Override
     protected Object clone() {
-        return new ResourceOrder(this);
+        return this.copy();
     }
 
     @Override
@@ -186,7 +205,7 @@ public final class ResourceOrder extends Encoding {
 
     @Override
     public int hashCode() {
-        int result = Arrays.hashCode(tasksByMachine);
+        int result = Arrays.deepHashCode(tasksByMachine);
         result = 31 * result + Arrays.hashCode(nextFreeSlot);
         return result;
     }
