@@ -30,7 +30,6 @@ public class ManualEncodingTests {
         this.reference = result.get();
     }
 
-    @Ignore("Not ready yet")
     @Test
     public void testManualSchedule() {
         System.out.println("***** Reference schedule to reproduce ******");
@@ -39,19 +38,26 @@ public class ManualEncodingTests {
         System.out.println("GANTT: " + this.reference.asciiGantt());
 
         Schedule manualSchedule = new Schedule(instance);
-        // TODO: encode the same solution
-        //manualSchedule.setStartTime(....);
-
+        manualSchedule.setStartTime(0, 0, 0);
+        manualSchedule.setStartTime(0, 1, 3);
+        manualSchedule.setStartTime(0, 2, 6);
+        manualSchedule.setStartTime(1, 0, 0);
+        manualSchedule.setStartTime(1, 1, 3);
+        manualSchedule.setStartTime(1, 2, 8);
+        System.out.println(manualSchedule);
 
         assert manualSchedule.equals(this.reference);
     }
 
-    @Ignore("Not ready yet")
     @Test
     public void testManualResourceOrder() {
         ResourceOrder manualRO = new ResourceOrder(instance);
-        // TODO: encode the same solution
-        //manualRO.addTaskToMachine(..., new Task(..., ...));
+        manualRO.addTaskToMachine(0, new Task(0, 0));
+        manualRO.addTaskToMachine(0, new Task(1, 1));
+        manualRO.addTaskToMachine(1, new Task(1, 0));
+        manualRO.addTaskToMachine(1, new Task(0, 1));
+        manualRO.addTaskToMachine(2, new Task(0, 2));
+        manualRO.addTaskToMachine(2, new Task(1, 2));
 
         Optional<Schedule> optSchedule = manualRO.toSchedule();
         assert optSchedule.isPresent() : "The resource order could not be converted to a schedule (probably invalid)";
@@ -59,12 +65,15 @@ public class ManualEncodingTests {
         assert schedule.equals(this.reference) : "The manual resource order encoding did not produce the same schedule";
     }
 
-    @Ignore("Not ready yet")
     @Test
     public void testOptimalResourceOrder() {
         ResourceOrder manualRO = new ResourceOrder(instance);
-        // TODO: encode the optimal solution
-        //manualRO.addTaskToMachine(..., new Task(..., ...));
+        manualRO.addTaskToMachine(0, new Task(0, 0));
+        manualRO.addTaskToMachine(0, new Task(1, 1));
+        manualRO.addTaskToMachine(1, new Task(1, 0));
+        manualRO.addTaskToMachine(1, new Task(0, 1));
+        manualRO.addTaskToMachine(2, new Task(1, 2));
+        manualRO.addTaskToMachine(2, new Task(0, 2));
 
         Optional<Schedule> optSchedule = manualRO.toSchedule();
         assert optSchedule.isPresent() : "The resource order cuold not be converted to a schedule (probably invalid)";
@@ -72,11 +81,15 @@ public class ManualEncodingTests {
         assert schedule.makespan() == 11 : "The manual resource order encoding did not produce the optimal schedule";
     }
 
-    @Ignore("Not ready yet")
     @Test
     public void testInvalidResourceOrder() {
         ResourceOrder manualRO = new ResourceOrder(instance);
-        // TODO: construct a complete but invalid solution in the resource order encoding
+        manualRO.addTaskToMachine(0, new Task(1, 1));
+        manualRO.addTaskToMachine(0, new Task(0, 0));
+        manualRO.addTaskToMachine(1, new Task(0, 1));
+        manualRO.addTaskToMachine(1, new Task(1, 0));
+        manualRO.addTaskToMachine(2, new Task(0, 2));
+        manualRO.addTaskToMachine(2, new Task(1, 2));
 
         assert manualRO.toSchedule().isEmpty();
     }

@@ -6,6 +6,7 @@ import jobshop.encodings.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /** Implementation of the Nowicki and Smutnicki neighborhood.
@@ -58,7 +59,9 @@ public class Nowicki extends Neighborhood {
          *  The original ResourceOrder MUST NOT be modified by this operation.
          */
         public ResourceOrder generateFrom(ResourceOrder original) {
-            throw new UnsupportedOperationException();
+            ResourceOrder neighbor = original.copy();
+            neighbor.swapTasks(this.t1, this.t2);
+            return neighbor;
         }
 
         @Override
@@ -85,7 +88,36 @@ public class Nowicki extends Neighborhood {
     /** Generates all swaps of the given ResourceOrder.
      * This method can be used if one wants to access the inner fields of a neighbors. */
     public List<Swap> allSwaps(ResourceOrder current) {
-        throw new UnsupportedOperationException();
+        var oSched = current.toSchedule();
+        if (oSched.isEmpty()) {
+            throw new RuntimeException("Invalid resource order");
+        }
+        var sched = oSched.get();
+        var path = sched.criticalPath();
+        List<Swap> swaps = new ArrayList<>();
+        if (path.isEmpty()) {
+            return swaps;
+        }
+        Function<Integer, Integer> mac = (Integer i) -> current.instance.machine(path.get(i));
+
+        int i = 0;
+        while (i < path.size() ) {
+            int machine = mac.apply(i);
+            boolean firstOfBlock = i == 0 || mac.apply(i-1) != machine;
+            boolean lastOfBlock = i == path.size() -1 || mac.apply(i+1) != machine;
+
+            if (firstOfBlock && !lastOfBlock) {
+                swaps.add(new Swap(path.get(i), path.get(i+1)));
+            } else if(lastOfBlock && !firstOfBlock) {
+                // note that this one may be duplicated if the block has a size of two
+                swaps.add(new Swap(path.get(i-1), path.get(i)));
+            }
+
+
+            i++;
+        }
+
+        return swaps;
     }
 
 }
